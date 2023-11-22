@@ -1,10 +1,7 @@
  package Login_sistem;
 
-
 import java.util.Arrays;
 import javax.swing.JOptionPane;
-
-
 
 public class Login {
 
@@ -17,9 +14,9 @@ public class Login {
     String[] senhas = new String[8000];
 
     String menu = "\n==============================! MENU PRINCIPAL !===============================\n 1 - LOGIN\n 2 - CADASTRAR\n 3 - SAIR";
+    boolean loop = true;
 
     public int Logar(int posicaoUsuario) {
-        boolean loop = true;
         int opcao = 0;
 
         while (loop) {
@@ -28,7 +25,7 @@ public class Login {
 
             switch (opcao) {
                 case '1':
-                    login(loop);
+                    loop = login();
                     break;
 
                 case '2':
@@ -48,7 +45,7 @@ public class Login {
         return posicaoUsuario;
     }
 
-    public boolean login(boolean loop) {
+    public boolean login() {
         String usuario = JOptionPane.showInputDialog(null, "Digite o nome do usuário:");
         String senha = JOptionPane.showInputDialog(null, "Digite a senha do usuário:");
 
@@ -57,11 +54,12 @@ public class Login {
         if (indexUsuario != -1 && senhas[indexUsuario].equals(senha)) {
             JOptionPane.showMessageDialog(null, "Login bem-sucedido!");
             JOptionPane.showMessageDialog(null, "Seja bem vindo " + usuario);
-            loop = false;
+            return false; // Retorna false para finalizar o loop
         } else {
             JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos");
-        }
-        return loop;
+            return true;
+         }
+        
     }
 
     public int cadastrar(int posicaoUsuario) {
